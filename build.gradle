@@ -1,0 +1,72 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+configurations {
+    // for putting Error Prone javac in bootclasspath for running tests
+    errorproneJavac
+}
+
+ext.versions = [
+        checkerFramework: "3.0.1",
+]
+
+
+sourceCompatibility = 1.8
+def checkerframework_local = false  // Set this variable to [true] while using local version of checker framework.
+
+dependencies {
+    // This dependency is found on compile classpath of this component and consumers.
+    if (checkerframework_local) {
+        implementation files('${CHECKERFRAMEWORK}/checker/dist/checker-qual.jar')
+        implementation files('${CHECKERFRAMEWORK}/checker/dist/checker.jar')
+        implementation files('${CHECKERFRAMEWORK}/checker/dist/jdk8.jar')
+    }
+    else {
+        implementation "org.checkerframework:checker:${versions.checkerFramework}"
+    }
+
+    compileOnly "com.google.errorprone:javac:9+181-r4173-1"
+
+    // Testing
+    testImplementation 'junit:junit:4.13'
+    testCompile "org.checkerframework:framework-test:${versions.checkerFramework}"
+
+    errorproneJavac "com.google.errorprone:javac:9+181-r4173-1"
+}
+
+tasks.withType(JavaCompile).all {
+    options.compilerArgs.add("-Xlint:all")
+}
+
+// Add `mavenLocal()` in `repositories`, then run `./gradlew publishToMavenLocal`
+// to publish your checker to your local Maven repository.
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'org.checkerframework'
+            artifactId = 'templatefora-checker'
+            version = '0.1-SNAPSHOT'
+
+            from components.java
+        }
+    }
+}
+
+test {
+    inputs.files("tests/templatefora")
+    if (!JavaVersion.current().java9Compatible) {
+        jvmArgs "-Xbootclasspath/p:${configurations.errorproneJavac.asPath}"
+    }
+}
+
+clean.doFirst {
+    delete "${rootDir}/tests/build/"
+}
