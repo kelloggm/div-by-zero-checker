@@ -23,25 +23,28 @@ public class DivByZeroVisitor extends BaseTypeVisitor<DivByZeroAnnotatedTypeFact
         /* x %= y */ Tree.Kind.REMAINDER_ASSIGNMENT);
 
     /**
-     * Determine what error (if any) to report at the given binary AST node.
+     * Determine whether to report an error at the given binary AST node.
+     * The error text is defined in the messages.properties file.
      * @param node the AST node to inspect
-     * @return a string to report if there is an error, or null if this node is ok
+     * @return true if an error should be reported, false otherwise
      */
-    private String errorAt(BinaryTree node) {
+    private boolean errorAt(BinaryTree node) {
         // A BinaryTree represents a binary operator, like + or -.
-        return null;
+        // TODO
+        return false;
     }
 
     /**
-     * Determine what error (if any) to report at the given compound assignment
-     * AST node.
+     * Determine whether to report an error at the given compound assignment
+     * AST node. The error text is defined in the messages.properties file.
      * @param node the AST node to inspect
-     * @return a string to report if there is an error, or null if this node is ok
+     * @return true if an error should be reported, false otherwise
      */
-    private String errorAt(CompoundAssignmentTree node) {
+    private boolean errorAt(CompoundAssignmentTree node) {
         // A CompoundAssignmentTree represents a binary operator plus assignment,
         // like "x += 10".
-        return null;
+        // TODO
+        return false;
     }
 
     // ========================================================================
@@ -69,9 +72,8 @@ public class DivByZeroVisitor extends BaseTypeVisitor<DivByZeroAnnotatedTypeFact
     @Override
     public Void visitBinary(BinaryTree node, Void p) {
         if (isInt(node)) {
-            String err = errorAt(node);
-            if (err != null) {
-                checker.report(Result.failure(err), node);
+            if (errorAt(node)) {
+                checker.report(Result.failure("divide.by.zero"), node);
             }
         }
         return super.visitBinary(node, p);
@@ -80,9 +82,8 @@ public class DivByZeroVisitor extends BaseTypeVisitor<DivByZeroAnnotatedTypeFact
     @Override
     public Void visitCompoundAssignment(CompoundAssignmentTree node, Void p) {
         if (isInt(node.getExpression())) {
-            String err = errorAt(node);
-            if (err != null) {
-                checker.report(Result.failure(err), node);
+            if (errorAt(node)) {
+                checker.report(Result.failure("divide.by.zero"), node);
             }
         }
         return super.visitCompoundAssignment(node, p);
