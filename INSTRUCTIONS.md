@@ -1,8 +1,8 @@
-CSE 503: Program Analysis
+CSE 503: Software Engineering
 
-## Assignment 3: Abstract Interpretation Implementation
+## Assignment: Abstract Interpretation Implementation
 
-In the last assignment you designed an abstract interpretation to catch divide-by-zero 
+You already designed an abstract interpretation to catch divide-by-zero 
 errors. In this assignment you will implement your design (or a simplified version 
 of it) for integer division in Java.
 
@@ -57,7 +57,7 @@ reporting errors at specific places in the program once the analysis terminates.
 5. At this point, your analysis is functional (although not very useful). Verify that 
 errors are reported using `./gradlew build`/`gradlew.bat build`. At this point, instead
 of seeing that *not enough* errors are issued on `Foo.java`, you should see that *too many*
-error are issued.
+errors are issued.
 
 6. Implement the abstraction function. The file `DivByZeroAnnotatedTypeFactory.java` 
 specifies the rules for what types to attach to constants in the program.
