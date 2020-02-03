@@ -8,7 +8,7 @@ of it) for integer division in Java.
 
 #### Implementation. 
 
-You will build your implementation using the [Checker Framework](checkerframework.org), 
+You will build your implementation using the [Checker Framework](https://checkerframework.org/), 
 a framework that simplifies the task of writing compiler plug-ins for Java.
 
 1. Clone this repository from 
