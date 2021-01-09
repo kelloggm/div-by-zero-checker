@@ -82,26 +82,6 @@ example, the statements
 ```
 should not report any divide-by-zero errors.
 
-#### Use and Writeup. 
-
-To run your analysis, follow the usage instructions in the `README`.
-Find a Java project, either one of your own or
-open-source, with more than 1000 lines of code. 
-Run your analysis on it to find potential divide-by-zero errors.
-
-1. How many potential errors does your analysis report? Estimate how many are false positives.
-2. Describe two different potential errors your analysis reported and explain why your tool reported errors
-at those locations.
-3. Based on what you have found, suggest some potential improvements to your analysis that could make
-it more useful.
-
-Submit your assignment to Canvas as a ZIP file containing your source code and a PDF of your writeup.
-(You do not need to include the code you tested your analysis on, but you may provide a link if it is
-open-source.)
-
-When you submit your completed assignment, please indicate how many hours it took to complete. This
-will not factor into your grade.
-
 #### Useful Tips. 
 
 When creating the lattice, you will need to attach annotations to each class:
@@ -112,12 +92,13 @@ When creating the lattice, you will need to attach annotations to each class:
 • The top of your lattice (and only the top!) should have `@DefaultQualifierInHierarchy`.
 
 • Use `@SubtypeOf({Top.class, Other.class, ...})` to indicate direct subtype relationships.
-If you wouldn’t draw those edges in the lattice diagram, you do not need to include 
+If you wouldn't draw those edges in the lattice diagram, you do not need to include
 them in the subtype list.
 
 Functions you need to fill in throughout the code are at the tops of their respective files. 
 Helper functions are available in some places, and code you do not need to touch is marked 
 as “Checker Framework plumbing.”
+
 However, you are welcome to extend your analysis in any way you choose, should you 
 have the time and interest to do so.
 
