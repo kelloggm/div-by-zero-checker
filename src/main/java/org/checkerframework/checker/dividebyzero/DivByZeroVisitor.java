@@ -29,7 +29,7 @@ public class DivByZeroVisitor extends BaseTypeVisitor<DivByZeroAnnotatedTypeFact
      * @return true if an error should be reported, false otherwise
      */
     private boolean errorAt(BinaryTree node) {
-        // A BinaryTree represents a binary operator, like + or -.
+        // A BinaryTree can represent any binary operator, including + or -.
         // TODO
         return false;
     }
@@ -41,8 +41,8 @@ public class DivByZeroVisitor extends BaseTypeVisitor<DivByZeroAnnotatedTypeFact
      * @return true if an error should be reported, false otherwise
      */
     private boolean errorAt(CompoundAssignmentTree node) {
-        // A CompoundAssignmentTree represents a binary operator plus assignment,
-        // like "x += 10".
+        // A CompoundAssignmentTree represents any binary operator combined with an assignment,
+        // such as "x += 10".
         // TODO
         return false;
     }
