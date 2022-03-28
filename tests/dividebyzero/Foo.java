@@ -2,8 +2,7 @@ import org.checkerframework.checker.dividebyzero.qual.*;
 
 // A simple test case for your divide-by-zero checker.
 // The file contains "// ::" comments to indicate expected
-// errors and warnings; see
-// https://github.com/typetools/checker-framework/blob/master/checker/tests/README.
+// errors and warnings.
 //
 // Passing this test does not guarantee a perfect grade on this assignment,
 // but it is an important start. You should always write your own test cases,
