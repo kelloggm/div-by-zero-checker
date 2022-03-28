@@ -2,7 +2,6 @@ package org.checkerframework.checker.dividebyzero;
 
 import org.checkerframework.common.basetype.BaseTypeChecker;
 import org.checkerframework.common.basetype.BaseTypeVisitor;
-import org.checkerframework.framework.source.Result;
 
 import javax.lang.model.type.TypeKind;
 import java.lang.annotation.Annotation;
@@ -73,7 +72,7 @@ public class DivByZeroVisitor extends BaseTypeVisitor<DivByZeroAnnotatedTypeFact
     public Void visitBinary(BinaryTree node, Void p) {
         if (isInt(node)) {
             if (errorAt(node)) {
-                checker.report(Result.failure("divide.by.zero"), node);
+                checker.reportError(node, "divide.by.zero");
             }
         }
         return super.visitBinary(node, p);
@@ -83,7 +82,7 @@ public class DivByZeroVisitor extends BaseTypeVisitor<DivByZeroAnnotatedTypeFact
     public Void visitCompoundAssignment(CompoundAssignmentTree node, Void p) {
         if (isInt(node.getExpression())) {
             if (errorAt(node)) {
-                checker.report(Result.failure("divide.by.zero"), node);
+                checker.reportError(node, "divide.by.zero");
             }
         }
         return super.visitCompoundAssignment(node, p);

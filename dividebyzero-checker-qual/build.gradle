@@ -3,11 +3,11 @@ plugins {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    implementation 'org.checkerframework:checker:3.0.1'
+    implementation 'org.checkerframework:checker-qual:3.23.1'
 }
 
 task copySources(type: Copy) {

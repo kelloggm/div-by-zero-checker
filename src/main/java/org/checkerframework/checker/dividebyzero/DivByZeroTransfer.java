@@ -1,5 +1,6 @@
 package org.checkerframework.checker.dividebyzero;
 
+import org.checkerframework.dataflow.expression.JavaExpression;
 import org.checkerframework.framework.type.QualifierHierarchy;
 import org.checkerframework.framework.flow.CFTransfer;
 import org.checkerframework.framework.flow.CFValue;
@@ -10,7 +11,6 @@ import org.checkerframework.dataflow.analysis.TransferInput;
 import org.checkerframework.dataflow.analysis.TransferResult;
 import org.checkerframework.dataflow.analysis.RegularTransferResult;
 import org.checkerframework.dataflow.analysis.ConditionalTransferResult;
-import org.checkerframework.dataflow.analysis.FlowExpressions;
 import org.checkerframework.javacutil.AnnotationBuilder;
 import org.checkerframework.javacutil.AnnotationUtils;
 
@@ -179,19 +179,19 @@ public class DivByZeroTransfer extends CFTransfer {
         CFStore elseStore = out.getElseStore().copy();
 
         thenStore.insertValue(
-            FlowExpressions.internalReprOf(analysis.getTypeFactory(), n.getLeftOperand()),
+                JavaExpression.fromNode(n.getLeftOperand()),
             refineLhsOfComparison(op, l, r));
 
         thenStore.insertValue(
-            FlowExpressions.internalReprOf(analysis.getTypeFactory(), n.getRightOperand()),
+            JavaExpression.fromNode(n.getRightOperand()),
             refineLhsOfComparison(flip(op), r, l));
 
         elseStore.insertValue(
-            FlowExpressions.internalReprOf(analysis.getTypeFactory(), n.getLeftOperand()),
+            JavaExpression.fromNode(n.getLeftOperand()),
             refineLhsOfComparison(negate(op), l, r));
 
         elseStore.insertValue(
-            FlowExpressions.internalReprOf(analysis.getTypeFactory(), n.getRightOperand()),
+            JavaExpression.fromNode(n.getRightOperand()),
             refineLhsOfComparison(flip(negate(op)), r, l));
 
         return new ConditionalTransferResult<>(out.getResultValue(), thenStore, elseStore);
