@@ -23,28 +23,30 @@ printed to the console, make sure that you can see a log containing:
 
 ```
 java.lang.AssertionError: The test run was expected to issue errors/warnings, but it did not.
-    0 out of 15 expected diagnostics were found.
-    15 expected diagnostics were not found:
-    Foo.java:17: error: divide.by.zero
-    Foo.java:20: error: divide.by.zero
-    Foo.java:27: error: divide.by.zero
-    Foo.java:36: error: divide.by.zero
-    Foo.java:43: error: divide.by.zero
-    Foo.java:48: error: divide.by.zero
-    Foo.java:59: error: divide.by.zero
-    Foo.java:68: error: divide.by.zero
-    Foo.java:75: error: divide.by.zero
-    Foo.java:83: error: divide.by.zero
-    Foo.java:86: error: divide.by.zero
-    Foo.java:89: error: divide.by.zero
-    Foo.java:118: error: divide.by.zero
-    Foo.java:133: error: divide.by.zero
-    Foo.java:137: error: divide.by.zero
+    0 out of 12 expected diagnostics were found.
+    12 expected diagnostics were not found:
+    Foo.java:16: error: divide.by.zero
+    Foo.java:19: error: divide.by.zero
+    Foo.java:26: error: divide.by.zero
+    Foo.java:35: error: divide.by.zero
+    Foo.java:42: error: divide.by.zero
+    Foo.java:47: error: divide.by.zero
+    Foo.java:58: error: divide.by.zero
+    Foo.java:67: error: divide.by.zero
+    Foo.java:74: error: divide.by.zero
+    Foo.java:82: error: divide.by.zero
+    Foo.java:85: error: divide.by.zero
+    Foo.java:88: error: divide.by.zero
 ```
 
   These errors indicate lines in the file `tests/dividebyzero/Foo.java` that ought to
-  warn about a divide-by-zero error, but do not. That file contains a (non-exhaustive)
-  selection of Java code that will issue divide by zero errors if executed.
+  warn about a divide-by-zero error, but do not. That file contains a
+  selection of Java code that will issue divide by zero errors if executed. The test code
+  in `Foo.java` is non-exhaustive: you are expected to write your own test code to
+  augment it. You can do so by either adding code to `Foo.java` or by adding new `.java`
+  files to the `tests/dividebyzero/` directory. We will not grade your test suite directly,
+  but writing a higher-quality test suite will help you avoid making mistakes in defining
+  your analysis.
 
 3. Create the lattice structure. The lattice is defined declaratively using files in 
 `src/main/java/org/checkerframework/checker/dividebyzero/qual`, one file
