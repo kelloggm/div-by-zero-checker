@@ -6,6 +6,13 @@ You already designed an abstract interpretation to catch divide-by-zero
 errors. In this assignment you will implement your design (or a simplified version 
 of it) for integer division in Java.
 
+Note that the instructions here are a simplified version of the
+[instructions](https://checkerframework.org/manual/#creating-a-checker)
+in the Checker Framework manual. In this assignment you won't have to
+go through all the steps of creating a checker (we've built a bunch of
+starter code for you!), but if you get stuck or run into problems
+referring to those instructions is a good idea.
+
 #### Implementation. 
 
 You will build your implementation using the [Checker Framework](https://checkerframework.org/), 
