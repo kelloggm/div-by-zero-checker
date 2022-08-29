@@ -77,7 +77,7 @@ public class DivByZeroAnnotatedTypeFactory extends BaseAnnotatedTypeFactory {
         //  > The AnnotatedTypeFactory only applies types computed by dataflow
         //  > if they are a subtype of the type it computed.  By default the
         //  > type of a binary tree is the lub of the two operands.  (In your
-        //  > example, that means the the type of "1-1" as computed by the type
+        //  > example, that means the type of "1-1" as computed by the type
         //  > factory is @NonZero which is not a super type of @Zero, so it is
         //  > discarded.)
         //
