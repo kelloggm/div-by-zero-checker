@@ -21,6 +21,8 @@ not suffer that run-time exception.
 
 ## How to run the checker
 
+Java 11 or later is required.
+
 First, publish the checker to your local Maven repository by running
 `./gradlew publishToMavenLocal` in this repository.
 
