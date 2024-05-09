@@ -13,18 +13,18 @@ import org.junit.runners.Parameterized.Parameters;
  * https://github.com/typetools/checker-framework/blob/master/checker/tests/README .
  */
 public class DivideByZeroTest extends CheckerFrameworkPerDirectoryTest {
-    public DivideByZeroTest(List<File> testFiles) {
-        super(
-                testFiles,
-                DivByZeroChecker.class,
-                "dividebyzero",
-                "-Anomsgtext",
-                "-Astubs=stubs/",
-                "-nowarn");
-    }
+  public DivideByZeroTest(List<File> testFiles) {
+    super(
+        testFiles,
+        DivByZeroChecker.class,
+        "dividebyzero",
+        "-Anomsgtext",
+        "-Astubs=stubs/",
+        "-nowarn");
+  }
 
-    @Parameters
-    public static String[] getTestDirs() {
-        return new String[] {"dividebyzero"};
-    }
+  @Parameters
+  public static String[] getTestDirs() {
+    return new String[] {"dividebyzero"};
+  }
 }
