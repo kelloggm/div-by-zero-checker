@@ -121,12 +121,12 @@ public class DivByZeroTransfer extends CFTransfer {
 
   /** Compute the least-upper-bound of two points in the lattice */
   private AnnotationMirror lub(AnnotationMirror x, AnnotationMirror y) {
-    return analysis.getTypeFactory().getQualifierHierarchy().leastUpperBoundQualifiers(x, y);
+    return analysis.getTypeFactory().getQualifierHierarchy().leastUpperBoundQualifiersOnly(x, y);
   }
 
   /** Compute the greatest-lower-bound of two points in the lattice */
   private AnnotationMirror glb(AnnotationMirror x, AnnotationMirror y) {
-    return analysis.getTypeFactory().getQualifierHierarchy().greatestLowerBoundQualifiers(x, y);
+    return analysis.getTypeFactory().getQualifierHierarchy().greatestLowerBoundQualifiersOnly(x, y);
   }
 
   /** Convert a "Class" object (e.g. "Top.class") to a point in the lattice */

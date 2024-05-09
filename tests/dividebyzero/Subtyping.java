@@ -1,4 +1,4 @@
-import org.checkerframework.checker.templatefora.qual.*;
+import org.checkerframework.checker.dividebyzero.qual.*;
 
 // Test subtyping relationships for the Divide By Zero Checker.
 // The file contains "// ::" comments to indicate expected errors and warnings.
