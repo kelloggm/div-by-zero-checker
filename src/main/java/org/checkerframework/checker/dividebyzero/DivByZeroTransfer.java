@@ -77,6 +77,26 @@ public class DivByZeroTransfer extends CFTransfer {
   private AnnotationMirror refineLhsOfComparison(
       Comparison operator, AnnotationMirror lhs, AnnotationMirror rhs) {
     // TODO
+    switch(operator) {
+      case EQ:
+        return rhs;
+      case NE:
+        if (equal(rhs, reflect(Zero.class))) {
+          return reflect(NonZero.class);
+        }
+        break;
+      case LT:
+      case GT:
+        if (equal(rhs, reflect(Zero.class))) {
+          return reflect(NonZero.class);
+        }
+        return reflect(Top.class);
+      case LE:
+      case GE:
+      default:
+        break;
+    }
+
     return lhs;
   }
 
@@ -98,6 +118,46 @@ public class DivByZeroTransfer extends CFTransfer {
   private AnnotationMirror arithmeticTransfer(
       BinaryOperator operator, AnnotationMirror lhs, AnnotationMirror rhs) {
     // TODO
+    switch(operator) {
+      case PLUS:
+      case MINUS:
+        if (equal(lhs, reflect(Bottom.class)) || equal(rhs, reflect(Bottom.class))) {
+          return bottom();
+        }
+        else if (equal(lhs, reflect(Top.class)) || equal(rhs, reflect(Top.class))) {
+          return top();
+        }
+        else if (equal(lhs, reflect(Zero.class)) && equal(rhs, reflect(Zero.class))) {
+          return reflect(Zero.class);
+        }
+        else if (equal(lhs, reflect(NonZero.class)) && equal(rhs, reflect(NonZero.class))) {
+          return reflect(Top.class);
+        }
+        else if ((equal(lhs, reflect(NonZero.class)) && equal(rhs, reflect(Zero.class))) 
+          || (equal(lhs, reflect(Zero.class)) && equal(rhs, reflect(NonZero.class)))) {
+          return reflect(NonZero.class);
+        }
+
+        throw new IllegalArgumentException(lhs.toString() + " " + operator + " " + rhs.toString());
+      case TIMES:
+        if (equal(lhs, reflect(Bottom.class)) || equal(rhs, reflect(Bottom.class))) {
+          return bottom();
+        }
+        else if (equal(lhs, reflect(Zero.class)) || equal(rhs, reflect(Zero.class))) {
+          return reflect(Zero.class);
+        }
+        else if (equal(lhs, reflect(Top.class)) || equal(rhs, reflect(Top.class))) {
+          return top();
+        }
+        else if (equal(lhs, reflect(NonZero.class)) && equal(rhs, reflect(NonZero.class))) {
+          return reflect(NonZero.class);
+        }
+        
+        throw new IllegalArgumentException(lhs.toString() + " " + operator + " " + rhs.toString());
+      case DIVIDE:
+      case MOD:
+    }
+
     return top();
   }
 
