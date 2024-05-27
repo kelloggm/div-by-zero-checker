@@ -76,7 +76,16 @@ public class DivByZeroTransfer extends CFTransfer {
    */
   private AnnotationMirror refineLhsOfComparison(
       Comparison operator, AnnotationMirror lhs, AnnotationMirror rhs) {
-    // TODO
+    
+    if (this.equal(rhs, this.zero())) {
+      if (operator == Comparison.EQ) {
+        return this.glb(lhs, this.zero());
+      }
+      else {
+        return this.glb(lhs, this.nonZero());
+      }
+    }
+
     return lhs;
   }
 
@@ -97,8 +106,40 @@ public class DivByZeroTransfer extends CFTransfer {
    */
   private AnnotationMirror arithmeticTransfer(
       BinaryOperator operator, AnnotationMirror lhs, AnnotationMirror rhs) {
-    // TODO
-    return top();
+    
+    if (operator == BinaryOperator.PLUS || operator == BinaryOperator.MINUS) {
+      if (this.equal(lhs, this.zero()) && this.equal(rhs, this.zero())) {
+        return this.zero();
+      }
+      else if (this.equal(lhs, this.zero()) || this.equal(rhs, this.zero())) {
+        return this.nonZero();
+      }
+      else {
+        return this.top();
+      }
+    }
+    else if (operator == BinaryOperator.TIMES) {
+      if (this.equal(lhs, this.zero()) || this.equal(rhs, this.zero())) {
+        return this.zero();
+      }
+      else {
+        return this.nonZero();
+      }
+    }
+    else if (operator == BinaryOperator.DIVIDE || operator == BinaryOperator.MOD) {
+      if (this.equal(rhs, this.zero())) {
+        return bottom();
+      }
+      else if (this.equal(lhs, this.zero())) {
+        return zero();
+      }
+      else {
+        return nonZero();
+      }
+    }
+    else {
+      return top();
+    }
   }
 
   // ========================================================================
@@ -117,6 +158,14 @@ public class DivByZeroTransfer extends CFTransfer {
         .getBottomAnnotations()
         .iterator()
         .next();
+  }
+
+  private AnnotationMirror zero() {
+    return this.reflect(Zero.class);
+  }
+
+  private AnnotationMirror nonZero() {
+    return this.reflect(NonZero.class);
   }
 
   /** Compute the least-upper-bound of two points in the lattice */

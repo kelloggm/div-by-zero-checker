@@ -8,6 +8,10 @@ import org.checkerframework.checker.dividebyzero.qual.*;
 // but it is an important start. You should always write your own test cases,
 // in addition to using those provided to you.
 class AssignmentProvidedTests {
+  public static void a() {
+    int x = 1 + 0;
+    int y = 1 / x;
+  }
 
   public static void f() {
     int one = 1;
