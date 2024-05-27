@@ -31,13 +31,11 @@ public class DivByZeroAnnotatedTypeFactory extends BaseAnnotatedTypeFactory {
         // TODO
         if (0 == intValue) return Zero.class;
         else return NonZero.class;
-        break;
       case LONG_LITERAL:
         long longValue = (Long) literal.getValue();
         // TODO
         if (0 == longValue) return Zero.class;
         else return NonZero.class;
-        break;
     }
     return Top.class;
   }
