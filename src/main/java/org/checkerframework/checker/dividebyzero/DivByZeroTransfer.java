@@ -138,7 +138,8 @@ public class DivByZeroTransfer extends CFTransfer {
           return reflect(NonZero.class);
         }
 
-        throw new IllegalArgumentException(lhs.toString() + " " + operator + " " + rhs.toString());
+        throwUnsatisfiedExpressionException(lhs, operator, rhs);
+        break;
       case TIMES:
         if (equal(lhs, reflect(Bottom.class)) || equal(rhs, reflect(Bottom.class))) {
           return bottom();
@@ -153,12 +154,39 @@ public class DivByZeroTransfer extends CFTransfer {
           return reflect(NonZero.class);
         }
         
-        throw new IllegalArgumentException(lhs.toString() + " " + operator + " " + rhs.toString());
+        throwUnsatisfiedExpressionException(lhs, operator, rhs);
+        break;
       case DIVIDE:
       case MOD:
+        if (equal(lhs, reflect(Bottom.class)) || equal(rhs, reflect(Bottom.class))
+          || equal(rhs, reflect(Zero.class)) || equal(rhs, reflect(Top.class))) {
+          return bottom();
+        }
+        else if (equal(lhs, reflect(Zero.class))) {
+          return reflect(Zero.class);
+        }
+        else if ((equal(lhs, reflect(Top.class)) || equal(lhs, reflect(NonZero.class)) 
+          && equal(rhs, reflect(NonZero.class)))) {
+          return reflect(Top.class);
+        }
+        throwUnsatisfiedExpressionException(lhs, operator, rhs);
+        break;
+      default:  
+        break;
     }
 
     return top();
+  }
+
+  // ========================================================================
+  // My helpers
+
+  private void throwUnsatisfiedExpressionException(Object lhs, BinaryOperator operator, Object rhs) {
+    throw new IllegalArgumentException(
+        "\n=========================" +
+        "\nUNSATISFIED EXPRESSION" + 
+        "\n=========================\n\t" +
+        lhs.toString() + "\n\t" + operator + "\n\t" + rhs.toString() + "\n");
   }
 
   // ========================================================================
