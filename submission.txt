@@ -1,0 +1,6 @@
+Group Members:
+- MacKevin Fey (mackfey)
+- Katherine Murphy (kate2001)
+
+div-by-zero-checker/ fork url:
+https://github.com/mackfey/div-by-zero-checker/tree/master
