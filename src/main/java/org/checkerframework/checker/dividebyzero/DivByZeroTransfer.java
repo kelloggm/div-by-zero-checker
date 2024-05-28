@@ -116,13 +116,15 @@ public class DivByZeroTransfer extends CFTransfer {
    */
   private AnnotationMirror arithmeticTransfer(
       BinaryOperator operator, AnnotationMirror lhs, AnnotationMirror rhs) {
+
+    if (equal(lhs, reflect(Bottom.class)) || equal(rhs, reflect(Bottom.class))) {
+      return bottom();
+    }
+
     switch(operator) {
       case PLUS:
       case MINUS:
-        if (equal(lhs, reflect(Bottom.class)) || equal(rhs, reflect(Bottom.class))) {
-          return bottom();
-        }
-        else if (equal(lhs, reflect(Top.class)) || equal(rhs, reflect(Top.class))) {
+        if (equal(lhs, reflect(Top.class)) || equal(rhs, reflect(Top.class))) {
           return top();
         }
         else if (equal(lhs, reflect(Zero.class)) && equal(rhs, reflect(Zero.class))) {
@@ -139,10 +141,7 @@ public class DivByZeroTransfer extends CFTransfer {
         throwUnsatisfiedExpressionException(lhs, operator, rhs);
         break;
       case TIMES:
-        if (equal(lhs, reflect(Bottom.class)) || equal(rhs, reflect(Bottom.class))) {
-          return bottom();
-        }
-        else if (equal(lhs, reflect(Zero.class)) || equal(rhs, reflect(Zero.class))) {
+        if (equal(lhs, reflect(Zero.class)) || equal(rhs, reflect(Zero.class))) {
           return reflect(Zero.class);
         }
         else if (equal(lhs, reflect(Top.class)) || equal(rhs, reflect(Top.class))) {
@@ -156,8 +155,7 @@ public class DivByZeroTransfer extends CFTransfer {
         break;
       case DIVIDE:
       case MOD:
-        if (equal(lhs, reflect(Bottom.class)) || equal(rhs, reflect(Bottom.class))
-          || equal(rhs, reflect(Zero.class)) || equal(rhs, reflect(Top.class))) {
+        if (equal(rhs, reflect(Zero.class)) || equal(rhs, reflect(Top.class))) {
           return bottom();
         }
         else if (equal(lhs, reflect(Zero.class))) {
