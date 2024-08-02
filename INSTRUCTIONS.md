@@ -112,3 +112,17 @@ as “Checker Framework plumbing.”
 However, you are welcome to extend your analysis in any way you choose, should you 
 have the time and interest to do so.
 
+The assignment does not work for all students on native Windows environments, for reasons
+that we don't know. We strongly suggest that you use either a Unix environment or
+the [Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/),
+both of which are known to work. If you do try to do the assignment on Windows natively,
+and you encounter an error log like the following, you need to switch to either a Unix
+environment or WSL:
+```
+java.lang.AssertionError: 0 out of 12 expected diagnostics were found.
+12 unexpected diagnostics were found:
+  AssignmentProvidedTests.java:-1: other: :16: error: (divide.by.zero)
+    int x = one / zero;
+                ^
+...
+```
