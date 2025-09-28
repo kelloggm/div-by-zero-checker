@@ -1,23 +1,17 @@
-# This repository
+# The Divide By Zero Checker
 
 This repository contains a template for an abstract interpretation implementation
 assignment. You can find the full instructions for the assignment in `INSTRUCTIONS.md`
 in this directory, or on your course webpage.
-
 The remainder of this README is the user-facing documentation for the analysis
 you will build.
-
-You should remove, from your version, everything above and including this line.
-
-
-# The Divide By Zero Checker
+You should remove, from your version, this paragraph.
 
 A common problem when programming is division by zero.
 This results in a run-time exception.
 
 The Divide By Zero Checker guarantees, at compile time, that your code will
 not suffer that run-time exception.
-
 
 ## How to run the checker
 
@@ -29,7 +23,7 @@ First, publish the checker to your local Maven repository by running
 Then, if you use Gradle, add the following to the `build.gradle` file in
 the project you wish to type-check (using Maven is similar):
 
-```
+```gradle
 repositories {
     mavenLocal()
     mavenCentral()
@@ -41,7 +35,6 @@ dependencies {
 
 Now, when you build your project, the Divide By Zero Checker will also run,
 informing you of any potential errors related to division by zero.
-
 
 ## How to specify your code
 
@@ -62,7 +55,6 @@ the Divide By Zero Checker, with an explanation of each one:
 
 TODO.
 
-
 ## How to build the checker
 
 Run these commands from the top-level directory.
@@ -71,7 +63,6 @@ Run these commands from the top-level directory.
 
 `./gradlew publishToMavenLocal`: publish the checker to your local Maven repository.
 This is useful for testing before you publish it elsewhere, such as to Maven Central.
-
 
 ## More information
 
