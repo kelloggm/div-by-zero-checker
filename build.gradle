@@ -1,6 +1,6 @@
 plugins {
-  id 'java'
-  id 'maven-publish'
+  id "java"
+  id "maven-publish"
 }
 
 repositories {
@@ -25,8 +25,8 @@ def checkerframework_local = false  // Set this variable to [true] while using l
 dependencies {
   // This dependency is found on compile classpath of this component and consumers.
   if (checkerframework_local) {
-    implementation files('${CHECKERFRAMEWORK}/checker/dist/checker-qual.jar')
-    implementation files('${CHECKERFRAMEWORK}/checker/dist/checker.jar')
+    implementation files("${CHECKERFRAMEWORK}/checker/dist/checker-qual.jar")
+    implementation files("${CHECKERFRAMEWORK}/checker/dist/checker.jar")
   }
   else {
     implementation "org.checkerframework:checker:${versions.checkerFramework}"
@@ -34,7 +34,7 @@ dependencies {
   }
 
   // Testing
-  testImplementation 'junit:junit:4.13.2'
+  testImplementation "junit:junit:4.13.2"
   testImplementation "org.checkerframework:framework-test:${versions.checkerFramework}"
 }
 
@@ -47,9 +47,9 @@ tasks.withType(JavaCompile).all {
 publishing {
   publications {
     maven(MavenPublication) {
-      groupId = 'org.checkerframework'
-      artifactId = 'dividebyzero-checker'
-      version = '0.1-SNAPSHOT'
+      groupId = "org.checkerframework"
+      artifactId = "dividebyzero-checker"
+      version = "0.1-SNAPSHOT"
 
       from components.java
     }
@@ -59,7 +59,7 @@ publishing {
 test {
   inputs.files("tests/dividebyzero")
   if (!JavaVersion.current().java9Compatible) {
-    ant.fail('Use Java 11 or later')
+    ant.fail("Use Java 11 or later")
   }
   // A list of add-export and add-open arguments to be used when running the Checker Framework.
   // Keep this list in sync with the list in the Checker Framework manual.
@@ -92,9 +92,9 @@ clean.doFirst {
 }
 
 task printClasspath {
-  description 'Prints the runtime classpath of the checker. ' +
-      'When typechecking, put the output of this task on either the ' +
-      'processor path or the classpath of the project being type-checed.'
+  description "Prints the runtime classpath of the checker. " +
+      "When typechecking, put the output of this task on either the " +
+      "processor path or the classpath of the project being type-checed."
   doLast {
     println sourceSets.main.runtimeClasspath.asPath
   }
@@ -105,7 +105,7 @@ sourceSets {
     resources {
       // ensures that any .stub files present in the same directory as
       // the checker source code are copied into the distributed jar
-      srcDirs += ['src/main/java']
+      srcDirs += ["src/main/java"]
     }
   }
 }
