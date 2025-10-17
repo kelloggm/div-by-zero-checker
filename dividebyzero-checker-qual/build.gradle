@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id "java"
 }
 
 repositories {
@@ -7,30 +7,30 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.checkerframework:checker-qual:3.51.1'
+    implementation "org.checkerframework:checker-qual:3.51.1"
 }
 
 task copySources(type: Copy) {
     includeEmptyDirs = false
     doFirst {
         // Delete the directory in case a previously copied file should no longer be in checker-qual
-        delete file('src/main/java')
+        delete file("src/main/java")
     }
 
-    from files('../src/main/java')
+    from files("../src/main/java")
     // Replace the path below with your actual path.
-    include '**/org/checkerframework/checker/dividebyzero/qual/**'
+    include "**/org/checkerframework/checker/dividebyzero/qual/**"
 
     // Make files read only.
     fileMode(0444)
 
-    into file('src/main/java')
+    into file("src/main/java")
 }
 
 jar {
     dependsOn copySources
     manifest {
-        attributes('Export-Package': '*')
+        attributes("Export-Package": "*")
     }
 }
 
@@ -39,5 +39,5 @@ compileJava {
 }
 
 clean {
-    delete file('src/')
+    delete file("src/")
 }
