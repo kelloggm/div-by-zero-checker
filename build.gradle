@@ -15,11 +15,11 @@ configurations {
 }
 
 ext.versions = [
-  checkerFramework: "3.55.1",
+  checkerFramework: "4.0.0",
 ]
 
 
-sourceCompatibility = 1.8
+sourceCompatibility = 21
 def checkerframework_local = false  // Set this variable to [true] while using local version of checker framework.
 
 dependencies {
