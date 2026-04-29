@@ -19,7 +19,10 @@ ext.versions = [
 ]
 
 
-sourceCompatibility = 21
+java {
+  sourceCompatibility = JavaVersion.VERSION_21
+  targetCompatibility = JavaVersion.VERSION_21
+}
 def checkerframework_local = false  // Set this variable to [true] while using local version of checker framework.
 
 dependencies {
