@@ -22,7 +22,9 @@ task copySources(type: Copy) {
     include "**/org/checkerframework/checker/dividebyzero/qual/**"
 
     // Make files read only.
-    fileMode(0444)
+    filePermissions {
+        unix(0444)
+    }
 
     into file("src/main/java")
 }
